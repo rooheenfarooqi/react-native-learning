@@ -41,3 +41,7 @@ app-example
 # generated native folders
 /ios
 /android
+
+# Local development files
+.claude/
+.vscode/
