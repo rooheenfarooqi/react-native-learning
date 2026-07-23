@@ -1,116 +1,165 @@
-import { Image } from "expo-image";
-import { Platform, Pressable, StyleSheet } from "react-native";
-
-import { HelloWave } from "@/components/hello-wave";
-import ParallaxScrollView from "@/components/parallax-scroll-view";
-import { ThemedText } from "@/components/themed-text";
-import { ThemedView } from "@/components/themed-view";
-import { Link } from "expo-router";
+import { router } from "expo-router";
+import {
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  Pressable,
+} from "react-native";
 
 export default function HomeScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
-      headerImage={
-        <Image
-          source={require("@/assets/images/partial-react-logo.png")}
-          style={styles.reactLogo}
-        />
-      }
-    >
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome Rooheen </ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit{" "}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText>{" "}
-          to see changes. Press{" "}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: "cmd + d",
-              android: "cmd + m",
-              web: "F12",
-            })}
-          </ThemedText>{" "}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction
-              title="Action"
-              icon="cube"
-              onPress={() => alert("Action pressed")}
-            />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert("Share pressed")}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert("Delete pressed")}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+    <SafeAreaView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.content}>
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/camera" asChild>
-          <Pressable style={styles.button}>
-            <ThemedText type="defaultSemiBold" style={styles.buttonText}>
-              📷 Open Camera
-            </ThemedText>
-          </Pressable>
-        </Link>
-      </ThemedView>
-    </ParallaxScrollView>
+        <Text style={styles.emoji}>👋</Text>
+
+        <Text style={styles.title}>
+          Welcome, Rooheen
+        </Text>
+
+        <Text style={styles.subtitle}>
+          Start your React Native Learning Journey
+        </Text>
+
+        <Text style={styles.description}>
+          Learn React Native step by step with
+          simple examples, hands-on practice,
+          and mini projects.
+        </Text>
+
+        <Pressable
+          style={styles.cameraButton}
+          onPress={() => router.push("/camera")}
+        >
+          <Text style={styles.cameraButtonText}>
+            📷 Open Camera
+          </Text>
+        </Pressable>
+
+        <Text style={styles.sectionTitle}>
+          Today's Learning
+        </Text>
+
+        <View style={styles.card}>
+          <Text style={styles.cardTitle}>
+            📱 Components
+          </Text>
+
+          <Text style={styles.cardDescription}>
+            Learn how React Native components
+            build your app interface.
+          </Text>
+        </View>
+
+        <View style={styles.card}>
+          <Text style={styles.cardTitle}>
+            🎨 Styling
+          </Text>
+
+          <Text style={styles.cardDescription}>
+            Practice layouts using Flexbox and
+            StyleSheet.
+          </Text>
+        </View>
+
+        <View style={styles.card}>
+          <Text style={styles.cardTitle}>
+            🧭 Navigation
+          </Text>
+
+          <Text style={styles.cardDescription}>
+            Navigate between screens using
+            Expo Router.
+          </Text>
+        </View>
+
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
+  container: {
+    flex: 1,
+    backgroundColor: "#111827",
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+
+  content: {
+    padding: 20,
+    paddingBottom: 40,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: "absolute",
-  },
-  button: {
-    backgroundColor: "#0A84FF",
-    paddingVertical: 14,
-    paddingHorizontal: 20,
-    borderRadius: 12,
-    alignItems: "center",
+
+  emoji: {
+    fontSize: 50,
+    textAlign: "center",
     marginTop: 10,
   },
 
-  buttonText: {
-    color: "white",
+  title: {
+    fontSize: 32,
+    fontWeight: "bold",
+    color: "#fff",
+    textAlign: "center",
+    marginTop: 10,
+  },
+
+  subtitle: {
+    fontSize: 18,
+    color: "#60A5FA",
+    textAlign: "center",
+    marginTop: 10,
+    fontWeight: "600",
+  },
+
+  description: {
+    color: "#D1D5DB",
     fontSize: 16,
+    textAlign: "center",
+    marginTop: 15,
+    lineHeight: 24,
+    marginBottom: 30,
+  },
+
+  cameraButton: {
+    backgroundColor: "#2563EB",
+    paddingVertical: 16,
+    borderRadius: 14,
+    alignItems: "center",
+    marginBottom: 35,
+  },
+
+  cameraButtonText: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "700",
+  },
+
+  sectionTitle: {
+    color: "#fff",
+    fontSize: 22,
+    fontWeight: "bold",
+    marginBottom: 15,
+  },
+
+  card: {
+    backgroundColor: "#1F2937",
+    borderRadius: 16,
+    padding: 18,
+    marginBottom: 15,
+  },
+
+  cardTitle: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "700",
+    marginBottom: 8,
+  },
+
+  cardDescription: {
+    color: "#D1D5DB",
+    fontSize: 15,
+    lineHeight: 22,
   },
 });
