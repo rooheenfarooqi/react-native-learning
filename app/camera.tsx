@@ -1,10 +1,13 @@
 import { CameraView, useCameraPermissions } from "expo-camera";
+import { Stack, router } from "expo-router";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
 
 export default function CameraScreen() {
   const [permission, requestPermission] = useCameraPermissions();
+  const [facing, setFacing] = useState<"front" | "back">("back");
 
-  // Permission is still loading
+  // Permission is loading
   if (!permission) {
     return (
       <View style={styles.container}>
@@ -16,22 +19,78 @@ export default function CameraScreen() {
   // Permission not granted
   if (!permission.granted) {
     return (
-      <View style={styles.container}>
-        <Text style={styles.title}>Camera Permission Required</Text>
+      <>
+        <Stack.Screen
+          options={{
+            title: "Camera Preview",
+          }}
+        />
 
-        <Text style={styles.description}>
-          This app needs access to your camera to show the live preview.
-        </Text>
+        <View style={styles.container}>
+          <Text style={styles.icon}>📷</Text>
 
-        <Pressable style={styles.button} onPress={requestPermission}>
-          <Text style={styles.buttonText}>Allow Camera Access</Text>
-        </Pressable>
-      </View>
+          <Text style={styles.title}>Camera Permission Required</Text>
+
+          <Text style={styles.description}>
+            This feature requires camera access to preview the live camera feed.
+          </Text>
+
+          {/* Back Button */}
+          <Pressable
+            style={styles.backButton}
+            onPress={() => router.back()}
+          >
+            <Text style={styles.backText}>← Back</Text>
+          </Pressable>
+
+          {/* Allow Camera Button */}
+          <Pressable
+            style={styles.button}
+            onPress={requestPermission}
+          >
+            <Text style={styles.buttonText}>
+              Allow Camera Access
+            </Text>
+          </Pressable>
+        </View>
+      </>
     );
   }
 
   // Permission granted → Show live camera preview
-  return <CameraView style={StyleSheet.absoluteFillObject} facing="back" />;
+  return (
+  <>
+    <Stack.Screen
+      options={{
+        headerShown: false,
+      }}
+    />
+
+    <View style={styles.cameraContainer}>
+       <CameraView
+        style={StyleSheet.absoluteFillObject}
+        facing={facing}
+        />
+
+      <Pressable
+        style={styles.overlayBackButton}
+        onPress={() => router.back()}
+      >
+        <Text style={styles.overlayBackText}>← Back</Text>
+      </Pressable>
+      <Pressable
+      style={styles.flipButton}
+      onPress={() =>
+    setFacing((current) =>
+      current === "back" ? "front" : "back"
+    )
+  }
+>
+  <Text style={styles.flipText}>🔄 Flip</Text>
+</Pressable>
+    </View>
+  </>
+);
 }
 
 const styles = StyleSheet.create({
@@ -40,30 +99,83 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
+    backgroundColor: "#fff",
+  },
+
+  icon: {
+    fontSize: 70,
+    marginBottom: 20,
   },
 
   title: {
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 10,
+    textAlign: "center",
   },
 
   description: {
-    textAlign: "center",
-    marginBottom: 20,
     fontSize: 16,
+    textAlign: "center",
+    marginBottom: 30,
+    color: "#555",
   },
 
-  button: {
-    backgroundColor: "#007AFF",
-    paddingHorizontal: 20,
-    paddingVertical: 14,
-    borderRadius: 10,
+  backButton: {
+    marginBottom: 15,
   },
 
-  buttonText: {
-    color: "white",
+  backText: {
+    color: "#007AFF",
     fontSize: 16,
     fontWeight: "600",
   },
+
+  button: {
+    backgroundColor: "#0A84FF",
+    width: "100%",
+    paddingVertical: 15,
+    borderRadius: 12,
+    alignItems: "center",
+  },
+
+  buttonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "600",
+  },
+  cameraContainer: {
+  flex: 1,
+},
+
+overlayBackButton: {
+  position: "absolute",
+  top: 60,
+  left: 20,
+  backgroundColor: "rgba(0,0,0,0.6)",
+  paddingHorizontal: 16,
+  paddingVertical: 10,
+  borderRadius: 20,
+},
+
+overlayBackText: {
+  color: "white",
+  fontSize: 16,
+  fontWeight: "600",
+},
+flipButton: {
+  position: "absolute",
+  top: 60,
+  right: 20,
+  backgroundColor: "rgba(0,0,0,0.6)",
+  paddingHorizontal: 16,
+  paddingVertical: 10,
+  borderRadius: 20,
+},
+
+flipText: {
+  color: "white",
+  fontSize: 16,
+  fontWeight: "600",
+},
 });
