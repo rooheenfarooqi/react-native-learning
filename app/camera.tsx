@@ -2,12 +2,12 @@ import { CameraView, useCameraPermissions } from "expo-camera";
 import { Stack, router } from "expo-router";
 import { useState } from "react";
 import {
-    Alert,
-    Linking,
-    Pressable,
-    StyleSheet,
-    Text,
-    View,
+  Alert,
+  Linking,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
 } from "react-native";
 
 export default function CameraScreen() {
@@ -51,12 +51,20 @@ export default function CameraScreen() {
               <Text style={styles.buttonText}>Open Settings</Text>
             </Pressable>
           ) : (
-            <Pressable style={styles.button} onPress={requestPermission}>
-              <Text style={styles.buttonText}>Allow Camera Access</Text>
+            <Pressable
+              style={styles.button}
+              onPress={requestPermission}
+            >
+              <Text style={styles.buttonText}>
+                Allow Camera Access
+              </Text>
             </Pressable>
           )}
 
-          <Pressable style={styles.backButton} onPress={() => router.back()}>
+          <Pressable
+            style={styles.backButton}
+            onPress={() => router.back()}
+          >
             <Text style={styles.backText}>← Go Back</Text>
           </Pressable>
         </View>
@@ -77,11 +85,17 @@ export default function CameraScreen() {
 
           <Text style={styles.description}>{cameraError}</Text>
 
-          <Pressable style={styles.button} onPress={() => setCameraError(null)}>
+          <Pressable
+            style={styles.button}
+            onPress={() => setCameraError(null)}
+          >
             <Text style={styles.buttonText}>Retry</Text>
           </Pressable>
 
-          <Pressable style={styles.backButton} onPress={() => router.back()}>
+          <Pressable
+            style={styles.backButton}
+            onPress={() => router.back()}
+          >
             <Text style={styles.backText}>← Go Back</Text>
           </Pressable>
         </View>
@@ -118,7 +132,9 @@ export default function CameraScreen() {
         <Pressable
           style={styles.flipButton}
           onPress={() =>
-            setFacing((current) => (current === "back" ? "front" : "back"))
+            setFacing((current) =>
+              current === "back" ? "front" : "back"
+            )
           }
         >
           <Text style={styles.overlayButtonText}>🔄 Flip</Text>
@@ -130,7 +146,7 @@ export default function CameraScreen() {
           onPress={() =>
             Alert.alert(
               "Coming Soon",
-              "Capture functionality is not part of this task.",
+              "Capture functionality is not part of this task."
             )
           }
         >

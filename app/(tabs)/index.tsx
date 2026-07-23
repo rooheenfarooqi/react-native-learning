@@ -39,7 +39,7 @@ export default function HomeScreen() {
         </Pressable>
 
         <Text style={styles.sectionTitle}>
-          Today's Learning
+           {"Today's Learning"}
         </Text>
 
         <View style={styles.card}>
