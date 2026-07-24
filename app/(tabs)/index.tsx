@@ -1,80 +1,75 @@
 import { router } from "expo-router";
 import {
+  Pressable,
   SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
   View,
-  Pressable,
 } from "react-native";
 
 export default function HomeScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
+        <Text accessibilityLabel="welcome-emoji" style={styles.emoji}>
+          👋
+        </Text>
 
-        <Text style={styles.emoji}>👋</Text>
-
-        <Text style={styles.title}>
+        <Text accessibilityLabel="welcome-title" style={styles.title}>
           Welcome, Rooheen
         </Text>
 
-        <Text style={styles.subtitle}>
+        <Text accessibilityLabel="welcome-subtitle" style={styles.subtitle}>
           Start your React Native Learning Journey
         </Text>
 
-        <Text style={styles.description}>
-          Learn React Native step by step with
-          simple examples, hands-on practice,
-          and mini projects.
+        <Text
+          accessibilityLabel="welcome-description"
+          style={styles.description}
+        >
+          Learn React Native step by step with simple examples, hands-on
+          practice, and mini projects.
         </Text>
 
         <Pressable
+          accessibilityLabel="open-camera-button"
           style={styles.cameraButton}
           onPress={() => router.push("/camera")}
         >
-          <Text style={styles.cameraButtonText}>
-            📷 Open Camera
-          </Text>
+          <Text style={styles.cameraButtonText}>📷 Open Camera</Text>
         </Pressable>
 
-        <Text style={styles.sectionTitle}>
-           {"Today's Learning"}
-        </Text>
+        <Text
+  accessibilityLabel="learning-section-title"
+  style={styles.sectionTitle}
+>
+  {"Today's Learning"}
+</Text>
 
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>
-            📱 Components
-          </Text>
+        <View accessibilityLabel="components-card" style={styles.card}>
+          <Text style={styles.cardTitle}>📱 Components</Text>
 
           <Text style={styles.cardDescription}>
-            Learn how React Native components
-            build your app interface.
+            Learn how React Native components build your app interface.
           </Text>
         </View>
 
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>
-            🎨 Styling
-          </Text>
+        <View accessibilityLabel="styling-card" style={styles.card}>
+          <Text style={styles.cardTitle}>🎨 Styling</Text>
 
           <Text style={styles.cardDescription}>
-            Practice layouts using Flexbox and
-            StyleSheet.
+            Practice layouts using Flexbox and StyleSheet.
           </Text>
         </View>
 
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>
-            🧭 Navigation
-          </Text>
+        <View accessibilityLabel="navigation-card" style={styles.card}>
+          <Text style={styles.cardTitle}>🧭 Navigation</Text>
 
           <Text style={styles.cardDescription}>
-            Navigate between screens using
-            Expo Router.
+            Navigate between screens using Expo Router.
           </Text>
         </View>
-
       </ScrollView>
     </SafeAreaView>
   );

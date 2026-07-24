@@ -24,7 +24,7 @@ export default function CameraScreen() {
       </View>
     );
   }
- 
+
   // Permission denied
   if (!permission.granted) {
     const permanentlyDenied = permission.canAskAgain === false;
@@ -36,9 +36,17 @@ export default function CameraScreen() {
         <View style={styles.container}>
           <Text style={styles.icon}>📷</Text>
 
-          <Text style={styles.title}>Camera Permission Required</Text>
+          <Text
+            accessibilityLabel="permission-title"
+            style={styles.title}
+          >
+            Camera Permission Required
+          </Text>
 
-          <Text style={styles.description}>
+          <Text
+            accessibilityLabel="permission-description"
+            style={styles.description}
+          >
             {permanentlyDenied
               ? "Camera permission has been permanently denied. Please enable it from your device settings."
               : "This feature requires camera access to preview the live camera feed."}
@@ -46,6 +54,7 @@ export default function CameraScreen() {
 
           {permanentlyDenied ? (
             <Pressable
+              accessibilityLabel="open-settings-button"
               style={styles.button}
               onPress={() => Linking.openSettings()}
             >
@@ -53,6 +62,7 @@ export default function CameraScreen() {
             </Pressable>
           ) : (
             <Pressable
+              accessibilityLabel="allow-camera-button"
               style={styles.button}
               onPress={requestPermission}
             >
@@ -63,6 +73,7 @@ export default function CameraScreen() {
           )}
 
           <Pressable
+            accessibilityLabel="go-back-button"
             style={styles.backButton}
             onPress={() => router.back()}
           >
@@ -72,34 +83,37 @@ export default function CameraScreen() {
       </>
     );
   }
-   if (noCamera) {
-  return (
-    <>
-      <Stack.Screen options={{ title: "Camera" }} />
 
-      <View style={styles.container}>
-        <Text style={styles.icon}>📷</Text>
+  // No camera available
+  if (noCamera) {
+    return (
+      <>
+        <Stack.Screen options={{ title: "Camera" }} />
 
-        <Text style={styles.title}>
-          No Camera Available
-        </Text>
+        <View style={styles.container}>
+          <Text style={styles.icon}>📷</Text>
 
-        <Text style={styles.description}>
-          This device does not have an available camera.
-        </Text>
-
-        <Pressable
-          style={styles.button}
-          onPress={() => router.back()}
-        >
-          <Text style={styles.buttonText}>
-            Go Back
+          <Text style={styles.title}>
+            No Camera Available
           </Text>
-        </Pressable>
-      </View>
-    </>
-  );
-}
+
+          <Text style={styles.description}>
+            This device does not have an available camera.
+          </Text>
+
+          <Pressable
+            style={styles.button}
+            onPress={() => router.back()}
+          >
+            <Text style={styles.buttonText}>
+              Go Back
+            </Text>
+          </Pressable>
+        </View>
+      </>
+    );
+  }
+
   // Camera failed
   if (cameraError) {
     return (
@@ -111,20 +125,27 @@ export default function CameraScreen() {
 
           <Text style={styles.title}>Camera Error</Text>
 
-          <Text style={styles.description}>{cameraError}</Text>
+          <Text style={styles.description}>
+            {cameraError}
+          </Text>
 
           <Pressable
+            accessibilityLabel="retry-button"
             style={styles.button}
             onPress={() => setCameraError(null)}
           >
-            <Text style={styles.buttonText}>Retry</Text>
+            <Text style={styles.buttonText}>
+              Retry
+            </Text>
           </Pressable>
 
           <Pressable
             style={styles.backButton}
             onPress={() => router.back()}
           >
-            <Text style={styles.backText}>← Go Back</Text>
+            <Text style={styles.backText}>
+              ← Go Back
+            </Text>
           </Pressable>
         </View>
       </>
@@ -141,19 +162,25 @@ export default function CameraScreen() {
 
       <View style={styles.cameraContainer}>
         <CameraView
+          accessibilityLabel="camera-preview"
           style={StyleSheet.absoluteFillObject}
           facing={facing}
           onMountError={(error) => {
             const message = error.message.toLowerCase();
 
-  if (message.includes("camera") &&
-  (message.includes("not available") ||message.includes("no camera") ||message.includes("unavailable")))
-  {
-    setNoCamera(true);
-  } else {
-    setCameraError(error.message);
-  }
-}}
+            if (
+              message.includes("camera") &&
+              (
+                message.includes("not available") ||
+                message.includes("no camera") ||
+                message.includes("unavailable")
+              )
+            ) {
+              setNoCamera(true);
+            } else {
+              setCameraError(error.message);
+            }
+          }}
         />
 
         {/* Back */}
@@ -161,11 +188,14 @@ export default function CameraScreen() {
           style={styles.overlayBackButton}
           onPress={() => router.back()}
         >
-          <Text style={styles.overlayButtonText}>← Back</Text>
+          <Text style={styles.overlayButtonText}>
+            ← Back
+          </Text>
         </Pressable>
 
         {/* Flip */}
         <Pressable
+          accessibilityLabel="flip-camera-button"
           style={styles.flipButton}
           onPress={() =>
             setFacing((current) =>
@@ -173,11 +203,14 @@ export default function CameraScreen() {
             )
           }
         >
-          <Text style={styles.overlayButtonText}>🔄 Flip</Text>
+          <Text style={styles.overlayButtonText}>
+            🔄 Flip
+          </Text>
         </Pressable>
 
-        {/* Capture (UI only) */}
+        {/* Capture */}
         <Pressable
+          accessibilityLabel="capture-button"
           style={styles.captureButton}
           onPress={() =>
             Alert.alert(
@@ -186,7 +219,9 @@ export default function CameraScreen() {
             )
           }
         >
-          <Text style={styles.captureText}>📷</Text>
+          <Text style={styles.captureText}>
+            📷
+          </Text>
         </Pressable>
       </View>
     </>

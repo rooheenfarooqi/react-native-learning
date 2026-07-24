@@ -1,0 +1,19 @@
+appId: host.exp.Exponent
+
+---
+- launchApp
+
+- assertVisible:
+    text: "Welcome"
+
+- tapOn:
+    id: "open-camera-button"
+
+- assertVisible:
+    id: "permission-title"
+
+- assertVisible:
+    id: "permission-description"
+
+- assertVisible:
+    id: "allow-camera-button"
