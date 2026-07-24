@@ -14,6 +14,7 @@ export default function CameraScreen() {
   const [permission, requestPermission] = useCameraPermissions();
   const [facing, setFacing] = useState<"front" | "back">("back");
   const [cameraError, setCameraError] = useState<string | null>(null);
+  const [noCamera, setNoCamera] = useState(false);
 
   // Checking permission
   if (!permission) {
@@ -23,7 +24,7 @@ export default function CameraScreen() {
       </View>
     );
   }
-
+ 
   // Permission denied
   if (!permission.granted) {
     const permanentlyDenied = permission.canAskAgain === false;
@@ -71,7 +72,34 @@ export default function CameraScreen() {
       </>
     );
   }
+   if (noCamera) {
+  return (
+    <>
+      <Stack.Screen options={{ title: "Camera" }} />
 
+      <View style={styles.container}>
+        <Text style={styles.icon}>📷</Text>
+
+        <Text style={styles.title}>
+          No Camera Available
+        </Text>
+
+        <Text style={styles.description}>
+          This device does not have an available camera.
+        </Text>
+
+        <Pressable
+          style={styles.button}
+          onPress={() => router.back()}
+        >
+          <Text style={styles.buttonText}>
+            Go Back
+          </Text>
+        </Pressable>
+      </View>
+    </>
+  );
+}
   // Camera failed
   if (cameraError) {
     return (
@@ -116,8 +144,16 @@ export default function CameraScreen() {
           style={StyleSheet.absoluteFillObject}
           facing={facing}
           onMountError={(error) => {
-            setCameraError(error.message);
-          }}
+            const message = error.message.toLowerCase();
+
+  if (message.includes("camera") &&
+  (message.includes("not available") ||message.includes("no camera") ||message.includes("unavailable")))
+  {
+    setNoCamera(true);
+  } else {
+    setCameraError(error.message);
+  }
+}}
         />
 
         {/* Back */}
