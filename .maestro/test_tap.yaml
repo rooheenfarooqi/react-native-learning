@@ -1,0 +1,6 @@
+appId: host.exp.exponent
+
+---
+
+- tapOn:
+    point: "540,1200"

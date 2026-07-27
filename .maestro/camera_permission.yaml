@@ -1,19 +1,18 @@
-appId: host.exp.Exponent
-
+appId: host.exp.exponent
 ---
 - launchApp
 
 - assertVisible:
-    text: "Welcome"
+    text: "Welcome, Rooheen"
 
 - tapOn:
-    id: "open-camera-button"
+    point: "438,1007"
 
 - assertVisible:
-    id: "permission-title"
+    id: "flip-camera-button"
 
-- assertVisible:
-    id: "permission-description"
+- tapOn:
+    id: "flip-camera-button"
 
-- assertVisible:
-    id: "allow-camera-button"
+- tapOn:
+    id: "back-button"

@@ -33,19 +33,26 @@ export default function HomeScreen() {
         </Text>
 
         <Pressable
+          testID="open-camera-button"
           accessibilityLabel="open-camera-button"
           style={styles.cameraButton}
           onPress={() => router.push("/camera")}
         >
-          <Text style={styles.cameraButtonText}>📷 Open Camera</Text>
+          <Text
+            testID="open-camera-button-text"
+            accessibilityLabel="open-camera-button-text"
+            style={styles.cameraButtonText}
+          >
+            📷 Open Camera
+          </Text>
         </Pressable>
 
         <Text
-  accessibilityLabel="learning-section-title"
-  style={styles.sectionTitle}
->
-  {"Today's Learning"}
-</Text>
+          accessibilityLabel="learning-section-title"
+          style={styles.sectionTitle}
+        >
+          {"Today's Learning"}
+        </Text>
 
         <View accessibilityLabel="components-card" style={styles.card}>
           <Text style={styles.cardTitle}>📱 Components</Text>

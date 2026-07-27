@@ -19,7 +19,11 @@ export default function CameraScreen() {
   // Checking permission
   if (!permission) {
     return (
-      <View style={styles.container}>
+      <View
+        testID="checking-permission-screen"
+        accessibilityLabel="checking-permission-screen"
+        style={styles.container}
+      >
         <Text style={styles.title}>Checking camera permission...</Text>
       </View>
     );
@@ -33,10 +37,21 @@ export default function CameraScreen() {
       <>
         <Stack.Screen options={{ title: "Camera" }} />
 
-        <View style={styles.container}>
-          <Text style={styles.icon}>📷</Text>
+        <View
+          testID="camera-permission-screen"
+          accessibilityLabel="camera-permission-screen"
+          style={styles.container}
+        >
+          <Text
+            testID="permission-icon"
+            accessibilityLabel="permission-icon"
+            style={styles.icon}
+          >
+            📷
+          </Text>
 
           <Text
+            testID="permission-title"
             accessibilityLabel="permission-title"
             style={styles.title}
           >
@@ -44,6 +59,7 @@ export default function CameraScreen() {
           </Text>
 
           <Text
+            testID="permission-description"
             accessibilityLabel="permission-description"
             style={styles.description}
           >
@@ -54,6 +70,7 @@ export default function CameraScreen() {
 
           {permanentlyDenied ? (
             <Pressable
+              testID="open-settings-button"
               accessibilityLabel="open-settings-button"
               style={styles.button}
               onPress={() => Linking.openSettings()}
@@ -62,17 +79,17 @@ export default function CameraScreen() {
             </Pressable>
           ) : (
             <Pressable
+              testID="allow-camera-button"
               accessibilityLabel="allow-camera-button"
               style={styles.button}
               onPress={requestPermission}
             >
-              <Text style={styles.buttonText}>
-                Allow Camera Access
-              </Text>
+              <Text style={styles.buttonText}>Allow Camera Access</Text>
             </Pressable>
           )}
 
           <Pressable
+            testID="go-back-button"
             accessibilityLabel="go-back-button"
             style={styles.backButton}
             onPress={() => router.back()}
@@ -90,10 +107,18 @@ export default function CameraScreen() {
       <>
         <Stack.Screen options={{ title: "Camera" }} />
 
-        <View style={styles.container}>
+        <View
+          testID="no-camera-screen"
+          accessibilityLabel="no-camera-screen"
+          style={styles.container}
+        >
           <Text style={styles.icon}>📷</Text>
 
-          <Text style={styles.title}>
+          <Text
+            testID="no-camera-title"
+            accessibilityLabel="no-camera-title"
+            style={styles.title}
+          >
             No Camera Available
           </Text>
 
@@ -102,12 +127,12 @@ export default function CameraScreen() {
           </Text>
 
           <Pressable
+            testID="no-camera-back-button"
+            accessibilityLabel="no-camera-back-button"
             style={styles.button}
             onPress={() => router.back()}
           >
-            <Text style={styles.buttonText}>
-              Go Back
-            </Text>
+            <Text style={styles.buttonText}>Go Back</Text>
           </Pressable>
         </View>
       </>
@@ -120,30 +145,37 @@ export default function CameraScreen() {
       <>
         <Stack.Screen options={{ title: "Camera Error" }} />
 
-        <View style={styles.container}>
+        <View
+          testID="camera-error-screen"
+          accessibilityLabel="camera-error-screen"
+          style={styles.container}
+        >
           <Text style={styles.icon}>⚠️</Text>
 
           <Text style={styles.title}>Camera Error</Text>
 
-          <Text style={styles.description}>
-            {cameraError}
-          </Text>
+          <Text style={styles.description}>{cameraError}</Text>
 
           <Pressable
+            testID="retry-button"
             accessibilityLabel="retry-button"
             style={styles.button}
             onPress={() => setCameraError(null)}
           >
-            <Text style={styles.buttonText}>
-              Retry
-            </Text>
+            <Text style={styles.buttonText}>Retry</Text>
           </Pressable>
 
           <Pressable
+            testID="camera-error-back-button"
+            accessibilityLabel="camera-error-back-button"
             style={styles.backButton}
             onPress={() => router.back()}
           >
-            <Text style={styles.backText}>
+            <Text
+              testID="camera-error-back-text"
+              accessibilityLabel="camera-error-back-text"
+              style={styles.backText}
+            >
               ← Go Back
             </Text>
           </Pressable>
@@ -162,6 +194,7 @@ export default function CameraScreen() {
 
       <View style={styles.cameraContainer}>
         <CameraView
+          testID="camera-preview"
           accessibilityLabel="camera-preview"
           style={StyleSheet.absoluteFillObject}
           facing={facing}
@@ -170,11 +203,9 @@ export default function CameraScreen() {
 
             if (
               message.includes("camera") &&
-              (
-                message.includes("not available") ||
+              (message.includes("not available") ||
                 message.includes("no camera") ||
-                message.includes("unavailable")
-              )
+                message.includes("unavailable"))
             ) {
               setNoCamera(true);
             } else {
@@ -185,41 +216,55 @@ export default function CameraScreen() {
 
         {/* Back */}
         <Pressable
+          testID="back-button"
+          accessibilityLabel="back-button"
           style={styles.overlayBackButton}
           onPress={() => router.back()}
         >
-          <Text style={styles.overlayButtonText}>
+          <Text
+            testID="back-button-text"
+            accessibilityLabel="back-button-text"
+            style={styles.overlayButtonText}
+          >
             ← Back
           </Text>
         </Pressable>
 
         {/* Flip */}
         <Pressable
+          testID="flip-camera-button"
           accessibilityLabel="flip-camera-button"
           style={styles.flipButton}
           onPress={() =>
-            setFacing((current) =>
-              current === "back" ? "front" : "back"
-            )
+            setFacing((current) => (current === "back" ? "front" : "back"))
           }
         >
-          <Text style={styles.overlayButtonText}>
+          <Text
+            testID="flip-button-text"
+            accessibilityLabel="flip-button-text"
+            style={styles.overlayButtonText}
+          >
             🔄 Flip
           </Text>
         </Pressable>
 
         {/* Capture */}
         <Pressable
+          testID="capture-button"
           accessibilityLabel="capture-button"
           style={styles.captureButton}
           onPress={() =>
             Alert.alert(
               "Coming Soon",
-              "Capture functionality is not part of this task."
+              "Capture functionality is not part of this task.",
             )
           }
         >
-          <Text style={styles.captureText}>
+          <Text
+            testID="capture-icon"
+            accessibilityLabel="capture-icon"
+            style={styles.captureText}
+          >
             📷
           </Text>
         </Pressable>
