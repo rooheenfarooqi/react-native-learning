@@ -1,12 +1,12 @@
 appId: host.exp.exponent
 ---
-- launchApp
+# - launchApp
 
 - assertVisible:
     text: "Welcome, Rooheen"
 
 - tapOn:
-    point: "438,1007"
+    id: "open-camera-button"
 
 - assertVisible:
     id: "flip-camera-button"
