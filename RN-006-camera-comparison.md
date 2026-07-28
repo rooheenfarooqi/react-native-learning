@@ -1,56 +1,60 @@
 # RN-006 Research
 
-## Runtime Camera Hardware Capabilities: `expo-camera` vs `react-native-vision-camera`
+# Runtime Camera Hardware Comparison
+
+### expo-camera vs react-native-vision-camera (v5)
 
 **Author:** Rooheen Farooqi  
-**Task:** RN-006 Research  
 **Project:** React Native Camera Exploration  
-**Date:** July 2026
+**Task:** RN-006 Research
 
 ---
 
-# Objective
+## Objective
 
-The goal of this research is to compare **expo-camera** and **react-native-vision-camera** to determine how much information each library can provide about a device's **actual camera hardware at runtime**.
+The purpose of this research is to compare **expo-camera** and **react-native-vision-camera (v5)** based on how much information each library can provide about a device's **actual camera hardware at runtime**.
 
 The comparison focuses on:
 
 - Available cameras
-- Camera lenses
+- Available lenses
 - Photo sizes
 - Video resolutions
 - Frame rates (FPS)
-- Whether FPS is tied to a specific resolution
-- High frame rate support
-- Exact APIs used
-- Expo Go vs Development Build support
+- Whether FPS depends on the selected resolution
+- High frame-rate support
+- Exact APIs
+- Expo Go vs Development Build requirements
 
 ---
 
 # Versions Tested
 
-| Library                    | Version                   |
-| -------------------------- | ------------------------- |
-| Expo SDK                   | 54                        |
-| expo-camera                | ~17.x (Expo SDK 54)       |
-| react-native-vision-camera | v5 API (latest major API) |
+| Library                    | Version |
+| -------------------------- | ------- |
+| Expo SDK                   | 54      |
+| expo-camera                | ~17.x   |
+| react-native-vision-camera | v5      |
 
-> **Note:** Vision Camera introduced major API changes in v5. Older tutorials and blog posts often reference deprecated APIs that no longer compile.
+> **Note**
+>
+> Vision Camera introduced major API changes in v5. Many older tutorials reference APIs from previous versions and are no longer compatible.
 
 ---
 
-# Feature Comparison
+# Runtime Hardware Comparison
 
-| Feature                                  | expo-camera                               | react-native-vision-camera (v5)                                                  |
-| ---------------------------------------- | ----------------------------------------- | -------------------------------------------------------------------------------- |
-| List available cameras                   | ❌ Not available                          | ✅ `Camera.getAvailableCameraDevices()`                                          |
-| Camera lens information                  | ⚠️ iOS only (`getAvailableLensesAsync()`) | ✅ Available through camera device information                                   |
-| Available photo sizes                    | ✅ `getAvailablePictureSizesAsync()`      | ⚠️ Determined through supported camera formats (no direct API)                   |
-| Available video resolutions              | ❌ Not available                          | ✅ Available from device formats                                                 |
-| Available frame rates (FPS)              | ❌ Not available                          | ✅ Available from format (`minFps` / `maxFps`)                                   |
-| FPS tied to resolution                   | ❌ Not available                          | ✅ Yes. Every camera format defines both its resolution and supported FPS range. |
-| High frame rate support (60/120/240 FPS) | ❌ Not available                          | ✅ Supported if the selected camera format supports it                           |
-| Runtime hardware information             | Limited                                   | Extensive                                                                        |
+| Capability                  | expo-camera                               | react-native-vision-camera (v5)             |
+| --------------------------- | ----------------------------------------- | ------------------------------------------- |
+| Enumerate camera devices    | **Not available**                         | ✅ `Camera.getAvailableCameraDevices()`     |
+| Lens information            | ⚠️ iOS only (`getAvailableLensesAsync()`) | ✅ Available through camera device metadata |
+| Select specific lens        | Limited (front/back + iOS lenses)         | ✅ Yes                                      |
+| Supported picture sizes     | ✅ `getAvailablePictureSizesAsync()`      | Available through camera formats            |
+| Supported video resolutions | Limited (`videoQuality` presets only)     | ✅ Available through `device.formats`       |
+| Available FPS               | Not available                             | ✅ `minFps` / `maxFps`                      |
+| FPS tied to resolution      | Not available                             | ✅ Yes                                      |
+| High FPS support            | Not exposed                               | ✅ Supported when hardware supports it      |
+| Detailed hardware metadata  | Limited                                   | Extensive                                   |
 
 ---
 
@@ -58,111 +62,194 @@ The comparison focuses on:
 
 ## expo-camera
 
-| Information             | API                                      |
-| ----------------------- | ---------------------------------------- |
-| Available picture sizes | `getAvailablePictureSizesAsync()`        |
-| Available lenses        | `getAvailableLensesAsync()` _(iOS only)_ |
-| Available cameras       | **Not available**                        |
-| Video resolutions       | **Not available**                        |
-| Frame rates             | **Not available**                        |
-| High frame rate support | **Not available**                        |
+| Information                 | API                                      |
+| --------------------------- | ---------------------------------------- |
+| Picture sizes               | `getAvailablePictureSizesAsync()`        |
+| Available lenses            | `getAvailableLensesAsync()` _(iOS only)_ |
+| Lens updates                | `onAvailableLensesChanged`               |
+| Selected lens               | `selectedLens`                           |
+| Video quality               | `videoQuality`                           |
+| Supported cameras           | **Not available**                        |
+| Supported FPS               | **Not available**                        |
+| Supported video resolutions | **Not available (only quality presets)** |
 
 ---
 
 ## react-native-vision-camera (v5)
 
-| Information       | API                                                             |
-| ----------------- | --------------------------------------------------------------- |
-| Available cameras | `Camera.getAvailableCameraDevices()`                            |
-| Camera formats    | `device.formats`                                                |
-| Video resolution  | `format.videoWidth` / `format.videoHeight`                      |
-| Frame rates       | `format.minFps` / `format.maxFps`                               |
-| High FPS support  | Select a format whose `maxFps` supports the required frame rate |
-| Lens information  | Available from the camera device metadata                       |
+| Information      | API                                  |
+| ---------------- | ------------------------------------ |
+| Camera devices   | `Camera.getAvailableCameraDevices()` |
+| Camera formats   | `device.formats`                     |
+| Photo resolution | Format properties                    |
+| Video resolution | `videoWidth` / `videoHeight`         |
+| Frame rates      | `minFps` / `maxFps`                  |
+| Lens information | Camera device metadata               |
+| High FPS support | Format with higher `maxFps`          |
 
 ---
 
-# FPS and Resolution Relationship
+# What expo-camera Can Discover
 
-A significant difference between the two libraries is how frame rates are handled.
+During the research, the following runtime capabilities were identified:
 
-### expo-camera
+### Available picture sizes
 
-The library does not expose runtime information about supported frame rates or their relationship to different resolutions.
+```ts
+getAvailablePictureSizesAsync();
+```
 
-### react-native-vision-camera
+Returns every picture size supported by the current camera.
 
-Each supported camera **Format** represents a hardware-supported configuration.
+---
 
-A format includes:
+### Available lenses (iOS)
 
-- Video resolution
-- Photo resolution
-- Minimum FPS
-- Maximum FPS
-- HDR support
-- Stabilization support
+```ts
+getAvailableLensesAsync();
+```
 
-This means that supported FPS values are **directly tied to a specific camera format and resolution**, matching the capabilities exposed by the underlying Android Camera2 or iOS AVFoundation APIs.
+Returns the lenses available for the currently selected camera.
+
+Lens changes can also be observed using
+
+```ts
+onAvailableLensesChanged;
+```
+
+and selected using
+
+```ts
+selectedLens;
+```
+
+---
+
+### Video quality
+
+expo-camera allows selecting predefined quality presets through
+
+```ts
+videoQuality;
+```
+
+Examples include
+
+- 2160p
+- 1080p
+- 720p
+- 480p
+
+However, it **does not expose the actual list of hardware-supported video resolutions**.
+
+---
+
+### Runtime limitations
+
+expo-camera does **not** expose:
+
+- camera device list
+- hardware camera metadata
+- supported FPS
+- supported camera formats
+- FPS/resolution combinations
+
+---
+
+# What Vision Camera Can Discover
+
+Vision Camera exposes considerably more information about the underlying camera hardware.
+
+A camera device contains multiple **Formats**, and each format describes one hardware-supported configuration.
+
+Each format can expose information such as:
+
+- photo resolution
+- video resolution
+- minimum FPS
+- maximum FPS
+- HDR capability
+- stabilization support
+- pixel format
+
+Because each format represents a real hardware configuration, the library knows exactly which frame rates are supported at each resolution.
+
+---
+
+# FPS and Resolution
+
+This is one of the biggest differences between the two libraries.
+
+## expo-camera
+
+No runtime API exists to determine
+
+- supported FPS
+- supported FPS for a given resolution
+
+Only predefined quality options are available.
+
+---
+
+## react-native-vision-camera
+
+Every camera format includes:
+
+- video resolution
+- minimum FPS
+- maximum FPS
+
+This means FPS is directly tied to a specific hardware format.
+
+For example, one format may support
+
+- 1920×1080 @ 30 FPS
+
+while another supports
+
+- 1920×1080 @ 60 FPS
+
+or
+
+- 1280×720 @ 120 FPS
+
+depending on the device.
 
 ---
 
 # Expo Go vs Development Build
 
-| Library                    | Expo Go            | Development Build |
-| -------------------------- | ------------------ | ----------------- |
-| expo-camera                | ✅ Fully supported | Optional          |
-| react-native-vision-camera | ❌ Not supported   | ✅ Required       |
+| Library                    | Expo Go          | Development Build |
+| -------------------------- | ---------------- | ----------------- |
+| expo-camera                | ✅ Supported     | Optional          |
+| react-native-vision-camera | ❌ Not supported | ✅ Required       |
 
-Vision Camera uses native modules that are not included in Expo Go. A custom **Expo Development Build** (or Bare React Native project) is required.
+Vision Camera relies on native modules that are not included in Expo Go.
 
----
-
-# Summary
-
-### expo-camera
-
-### Advantages
-
-- Easy to integrate
-- Works immediately with Expo Go
-- Suitable for basic camera functionality
-- Provides picture size information
-
-### Limitations
-
-- Cannot enumerate camera hardware
-- No runtime video format information
-- No FPS information
-- No high-frame-rate capability discovery
+Using Vision Camera requires an Expo Development Build (or Bare React Native).
 
 ---
 
-### react-native-vision-camera
+# Overall Comparison
 
-### Advantages
-
-- Provides detailed runtime camera hardware information
-- Enumerates available camera devices
-- Exposes camera formats
-- Reports supported resolutions
-- Reports supported frame rates
-- Supports hardware capability discovery
-- Supports high frame rate cameras
-
-### Limitations
-
-- Requires a Development Build
-- More complex setup than expo-camera
+| Category                     | Better Choice |
+| ---------------------------- | ------------- |
+| Fast setup                   | expo-camera   |
+| Works inside Expo Go         | expo-camera   |
+| Runtime hardware discovery   | Vision Camera |
+| Camera metadata              | Vision Camera |
+| Camera format selection      | Vision Camera |
+| High FPS support             | Vision Camera |
+| Advanced camera applications | Vision Camera |
 
 ---
 
 # Recommendation
 
-For applications that only require camera preview, photo capture, and video recording, **expo-camera** is the better choice because it integrates seamlessly with Expo Go and has a simpler development workflow.
+For this project, the goal is to understand the **device's actual camera hardware at runtime** rather than simply capture photos or videos.
 
-For applications that need to understand the device's actual camera hardware—such as detecting available cameras, supported resolutions, frame rates, high-frame-rate recording, or selecting optimal camera formats—**react-native-vision-camera (v5)** is the recommended library.
+While **expo-camera** provides a straightforward API that works directly in Expo Go and is well suited for basic camera functionality, it exposes only limited runtime hardware information. It can report supported picture sizes and, on iOS, available lenses, but it does not provide access to camera formats, supported frame rates, or the relationship between frame rates and resolutions.
 
-Since this project is exploring runtime camera capabilities and hardware information, **react-native-vision-camera (v5)** is the recommended option because it exposes significantly more camera metadata and hardware capabilities than **expo-camera**, making it more suitable for advanced camera applications.
+**react-native-vision-camera (v5)** provides significantly richer access to the underlying camera hardware. It exposes camera devices, formats, resolutions, frame-rate ranges, lens metadata, and high-frame-rate capabilities, making it the more suitable choice for applications that require hardware-aware camera functionality.
 
----
+**Recommendation:** For applications focused on advanced camera capabilities, runtime hardware inspection, or future features such as AI, computer vision, or high-performance video capture, **react-native-vision-camera (v5)** is the recommended library. For simpler applications that prioritise rapid development and Expo Go compatibility, **expo-camera** remains an excellent choice.
