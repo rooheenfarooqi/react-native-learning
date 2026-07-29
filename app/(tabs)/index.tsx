@@ -47,6 +47,21 @@ export default function HomeScreen() {
           </Text>
         </Pressable>
 
+        <Pressable
+          testID="open-capabilities-button"
+          accessibilityLabel="open-capabilities-button"
+          style={[styles.cameraButton, { backgroundColor: "#2563eb" }]}
+          onPress={() => router.push("/capabilities")}
+        >
+          <Text
+            testID="open-capabilities-button-text"
+            accessibilityLabel="open-capabilities-button-text"
+            style={styles.cameraButtonText}
+          >
+            📊 Camera Capabilities
+          </Text>
+        </Pressable>
+
         <Text
           accessibilityLabel="learning-section-title"
           style={styles.sectionTitle}
@@ -125,7 +140,7 @@ const styles = StyleSheet.create({
   },
 
   cameraButton: {
-    backgroundColor: "#2563EB",
+    backgroundColor: "#2563eb",
     paddingVertical: 16,
     borderRadius: 14,
     alignItems: "center",
