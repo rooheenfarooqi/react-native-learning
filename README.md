@@ -1,6 +1,6 @@
 # React Native Learning
 
-This repository contains my React Native learning journey and internship tasks. The purpose of this repository is to understand React Native development, Expo, native mobile APIs, testing, Git workflows, and mobile application architecture through hands-on tasks.
+A React Native learning repository created during my internship to explore mobile application development using Expo, React Native, and Native APIs. This repository contains all the tasks completed during the learning process, along with the concepts and technologies learned in each task.
 
 ---
 
@@ -15,134 +15,186 @@ This repository contains my React Native learning journey and internship tasks. 
 - React Native Safe Area Context
 - Maestro (E2E Testing)
 - Android Studio
-- Expo Development Build (EAS)
-- Git & GitHub
+- EAS Development Build
+- Git
+- GitHub
 
 ---
 
-# Learning Journey & Completed Tasks
+# Project Structure
 
-## Task 1 - React Native Project Setup
+```text
+my-first-app/
+│
+├── app/
+│   ├── (tabs)/
+│   │   ├── _layout.tsx
+│   │   ├── explore.tsx
+│   │   └── index.tsx
+│   │
+│   ├── _layout.tsx
+│   ├── camera.tsx
+│   ├── capabilities.tsx
+│   └── modal.tsx
+│
+├── assets/
+│   └── images/
+│
+├── components/
+│   ├── ui/
+│   ├── external-link.tsx
+│   ├── haptic-tab.tsx
+│   ├── hello-wave.tsx
+│   ├── parallax-scroll-view.tsx
+│   ├── themed-text.tsx
+│   └── themed-view.tsx
+│
+├── constants/
+├── hooks/
+├── scripts/
+│
+├── .maestro/
+│   ├── camera_permission.yaml
+│   └── test_tap.yaml
+│
+├── app.json
+├── eas.json
+├── package.json
+├── tsconfig.json
+├── README.md
+└── MAESTRO.md
+```
+
+---
+
+# Internship Learning Journey
+
+## Task 1 – React Native Environment Setup
 
 ### Objective
-Set up the React Native development environment and create the first Expo project.
+
+Set up a React Native development environment using Expo.
 
 ### Work Completed
+
 - Installed Node.js
-- Installed Expo CLI
-- Created first React Native project using Expo
+- Installed Expo
+- Created a React Native project
 - Configured Expo Router
-- Ran the application on Android
-- Learned project structure
+- Successfully ran the application on Android
+- Explored the project structure
 
 ### Technologies Used
+
 - React Native
 - Expo
 - Expo Router
 - TypeScript
 
-### Concepts Learned
+### Learning Outcomes
+
 - React Native project structure
 - Expo workflow
 - File-based routing
-- Running applications on Android
+- Running applications on Android devices
 
 ---
 
-# Task 2 - Navigation
+# Task 2 – Navigation & Routing
 
 ### Objective
+
 Learn navigation using Expo Router.
 
 ### Work Completed
+
 - Created multiple screens
-- Navigated between screens
-- Understood Stack Navigation
-- Understood File-based Routing
+- Added navigation between screens
+- Learned Stack Navigation
+- Understood file-based routing
 
 ### Technologies Used
-- Expo Router
-- React Navigation (through Expo Router)
 
-### Concepts Learned
-- Stack navigation
-- Route management
-- Screen transitions
+- Expo Router
+
+### Learning Outcomes
+
+- Screen navigation
+- Routing
+- Stack layouts
+- Project organization
 
 ---
 
-# Task 3 - Camera Permission Screen (RN-005)
+# Task 3 – Camera Permission & Preview (RN-005)
 
 ### Objective
-Request camera permission from the user and display a live camera preview.
+
+Request camera permission and display a live camera preview.
 
 ### Work Completed
 
 - Requested camera permission
-- Handled permission granted state
-- Handled permission denied state
-- Displayed camera preview
-- Added camera flip functionality
+- Displayed live camera preview
+- Implemented camera switching
+- Added camera permission handling
 - Added error handling for:
-  - Camera unavailable
   - Permission denied
-  - Retry
-  - Open device settings
-- Prevented application crashes
-- Added proper UI messages
+  - Permanently denied permission
+  - Camera unavailable
+  - Retry option
+  - Open Settings option
+- Prevented blank screens and crashes
 
 ### Technologies Used
 
 - Expo Camera
-- Expo Linking
 - React Native
+- Expo Linking
 
-### Concepts Learned
+### Learning Outcomes
 
 - Runtime permissions
 - Camera lifecycle
 - Error handling
-- Native permission flow
-- Device settings redirection
+- Native device permissions
 
 ---
 
-# Task 4 - Git & GitHub Workflow
+# Task 4 – Git & GitHub Workflow
 
 ### Objective
 
-Learn professional Git workflow.
+Learn professional version control workflow.
 
 ### Work Completed
 
-- Created repository
-- Learned Git branching
-- Worked on development branch
-- Committed changes
+- Created Git repository
+- Used Git branches
+- Added and committed changes
 - Pushed changes to GitHub
 - Updated .gitignore
-- Removed unwanted files from Git tracking
+- Removed unnecessary tracked files
 
 ### Technologies Used
 
 - Git
 - GitHub
 
-### Concepts Learned
+### Learning Outcomes
 
 - Branching
 - Commits
-- Push
-- Pull
+- Push/Pull
 - Repository management
 
 ---
 
-# Task 5 - Camera API Research (RN-006)
+# Task 5 – Camera Library Research (RN-006)
 
 ### Objective
 
-Research camera libraries available for React Native and compare their capabilities.
+Research React Native camera libraries and compare their capabilities.
 
 ### Work Completed
 
@@ -154,43 +206,41 @@ Compared:
 Researched:
 
 - Camera permissions
-- Camera capabilities
 - Camera formats
-- Photo resolutions
-- Video resolutions
+- Camera resolutions
 - FPS support
-- Native API support
-- Expo Go compatibility
-- Development Build requirements
+- Native API access
+- Expo Go limitations
+- Development Builds
+- Hardware capability detection
 
 ### Technologies Used
 
 - Expo Camera
 - React Native Vision Camera
 
-### Concepts Learned
+### Learning Outcomes
 
-- Native modules
-- Development builds
-- Camera hardware APIs
-- Expo limitations
+- Native APIs
+- Camera hardware
 - Runtime capability detection
+- Expo limitations
+- Development Builds
 
 ---
 
-# Task 6 - Vision Camera Setup
+# Task 6 – Vision Camera Integration
 
 ### Objective
 
-Configure Vision Camera using a native development build.
+Configure Vision Camera using Native Development Builds.
 
 ### Work Completed
 
-- Installed Vision Camera
+- Installed React Native Vision Camera
 - Installed Nitro Modules
-- Configured Android permissions
-- Built Expo Development Build using EAS
-- Installed APK
+- Built Android Development Build using EAS
+- Configured required permissions
 - Verified native module functionality
 
 ### Technologies Used
@@ -199,33 +249,31 @@ Configure Vision Camera using a native development build.
 - Nitro Modules
 - EAS Build
 
-### Concepts Learned
+### Learning Outcomes
 
-- Native modules
+- Native Modules
 - JSI
 - Hybrid Objects
-- Development builds
-- Native dependency management
+- Android native integration
 
 ---
 
-# Task 7 - Camera Capability Screen (RN-007)
+# Task 7 – Camera Capability Screen (RN-007)
 
 ### Objective
 
-Read camera hardware information at runtime using native APIs.
+Display camera hardware capabilities dynamically using native APIs.
 
 ### Work Completed
 
-Built a Camera Capability screen that dynamically detects available cameras and displays hardware information.
+Developed a Camera Capability screen that retrieves runtime camera information directly from the device.
 
 Implemented:
 
-- Camera detection
+- Detection of all available cameras
 - Front camera detection
 - Back camera detection
-- Multiple camera detection
-- Runtime hardware information
+- Multiple camera support
 - Flash support
 - Torch support
 - HDR support
@@ -238,7 +286,7 @@ Implemented:
 - Supported Photo Resolutions
 - Supported Video Resolutions
 
-All information is retrieved dynamically from the device using native Vision Camera APIs.
+All camera information is obtained dynamically using Vision Camera's native APIs without hardcoding values.
 
 ### Technologies Used
 
@@ -247,71 +295,71 @@ All information is retrieved dynamically from the device using native Vision Cam
 - TypeScript
 - React Native
 
-### Concepts Learned
+### Learning Outcomes
 
-- Runtime hardware capability detection
+- Native hardware capability detection
 - Camera devices
-- Camera resolutions
+- Runtime APIs
 - FPS ranges
 - Pixel formats
+- Camera resolutions
 - Hybrid Objects
-- Native camera capabilities
 
 ---
 
-# Task 8 - Maestro End-to-End Testing
+# Task 8 – Maestro End-to-End Testing
 
 ### Objective
 
-Learn mobile application end-to-end testing.
+Learn automated mobile application testing.
 
 ### Work Completed
 
 - Installed Maestro
-- Created first E2E test
+- Created test flows
 - Tested camera permission screen
 - Learned deterministic testing
-- Verified application flow
+- Executed automated UI tests
 
 ### Technologies Used
 
 - Maestro
 
-### Concepts Learned
+### Learning Outcomes
 
-- Mobile UI testing
-- End-to-end testing
-- Test automation
-- Mobile test flows
+- End-to-End Testing
+- Mobile automation
+- UI testing
+- Test flows
 
 ---
 
-# Skills Gained
+# Skills Acquired
 
-Throughout these tasks I gained practical experience in:
+Through these tasks I gained practical experience in:
 
-- React Native fundamentals
-- Expo ecosystem
+- React Native Development
+- Expo SDK
 - Expo Router
-- Native mobile APIs
-- Camera integration
-- Runtime permissions
-- Vision Camera
+- TypeScript
+- Native Mobile APIs
+- Camera Integration
+- Runtime Permissions
+- React Native Vision Camera
 - Native Modules
 - JSI & Hybrid Objects
 - Android Development
 - Git & GitHub
 - EAS Development Builds
-- Mobile testing with Maestro
-- Error handling
-- Mobile UI development
-- TypeScript
+- Mobile UI Development
+- Error Handling
+- End-to-End Testing with Maestro
 
 ---
 
-# Future Learning
+# Future Improvements
 
-This repository will continue to be updated with new internship tasks, React Native concepts, native module integrations, testing, and mobile application development features.
+This repository will continue to grow as more internship tasks and React Native concepts are completed, including additional native integrations, testing, and advanced mobile application features.
 
 ---
 
@@ -322,4 +370,4 @@ This repository will continue to be updated with new internship tasks, React Nat
 BS Computer Science  
 Institute of Space Technology (IST)
 
-React Native & Mobile Application Development Learning Repository
+React Native Learning Repository
