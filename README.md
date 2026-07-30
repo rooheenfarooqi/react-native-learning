@@ -1,50 +1,325 @@
-# Welcome to your Expo app 👋
+# React Native Learning
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This repository contains my React Native learning journey and internship tasks. The purpose of this repository is to understand React Native development, Expo, native mobile APIs, testing, Git workflows, and mobile application architecture through hands-on tasks.
 
-## Get started
+---
 
-1. Install dependencies
+# Technologies Used
 
-   ```bash
-   npm install
-   ```
+- React Native
+- Expo SDK 54
+- Expo Router
+- TypeScript
+- React Native Vision Camera
+- Expo Camera
+- React Native Safe Area Context
+- Maestro (E2E Testing)
+- Android Studio
+- Expo Development Build (EAS)
+- Git & GitHub
 
-2. Start the app
+---
 
-   ```bash
-   npx expo start
-   ```
+# Learning Journey & Completed Tasks
 
-In the output, you'll find options to open the app in a
+## Task 1 - React Native Project Setup
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### Objective
+Set up the React Native development environment and create the first Expo project.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### Work Completed
+- Installed Node.js
+- Installed Expo CLI
+- Created first React Native project using Expo
+- Configured Expo Router
+- Ran the application on Android
+- Learned project structure
 
-## Get a fresh project
+### Technologies Used
+- React Native
+- Expo
+- Expo Router
+- TypeScript
 
-When you're ready, run:
+### Concepts Learned
+- React Native project structure
+- Expo workflow
+- File-based routing
+- Running applications on Android
 
-```bash
-npm run reset-project
-```
+---
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+# Task 2 - Navigation
 
-## Learn more
+### Objective
+Learn navigation using Expo Router.
 
-To learn more about developing your project with Expo, look at the following resources:
+### Work Completed
+- Created multiple screens
+- Navigated between screens
+- Understood Stack Navigation
+- Understood File-based Routing
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+### Technologies Used
+- Expo Router
+- React Navigation (through Expo Router)
 
-## Join the community
+### Concepts Learned
+- Stack navigation
+- Route management
+- Screen transitions
 
-Join our community of developers creating universal apps.
+---
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+# Task 3 - Camera Permission Screen (RN-005)
+
+### Objective
+Request camera permission from the user and display a live camera preview.
+
+### Work Completed
+
+- Requested camera permission
+- Handled permission granted state
+- Handled permission denied state
+- Displayed camera preview
+- Added camera flip functionality
+- Added error handling for:
+  - Camera unavailable
+  - Permission denied
+  - Retry
+  - Open device settings
+- Prevented application crashes
+- Added proper UI messages
+
+### Technologies Used
+
+- Expo Camera
+- Expo Linking
+- React Native
+
+### Concepts Learned
+
+- Runtime permissions
+- Camera lifecycle
+- Error handling
+- Native permission flow
+- Device settings redirection
+
+---
+
+# Task 4 - Git & GitHub Workflow
+
+### Objective
+
+Learn professional Git workflow.
+
+### Work Completed
+
+- Created repository
+- Learned Git branching
+- Worked on development branch
+- Committed changes
+- Pushed changes to GitHub
+- Updated .gitignore
+- Removed unwanted files from Git tracking
+
+### Technologies Used
+
+- Git
+- GitHub
+
+### Concepts Learned
+
+- Branching
+- Commits
+- Push
+- Pull
+- Repository management
+
+---
+
+# Task 5 - Camera API Research (RN-006)
+
+### Objective
+
+Research camera libraries available for React Native and compare their capabilities.
+
+### Work Completed
+
+Compared:
+
+- Expo Camera
+- React Native Vision Camera
+
+Researched:
+
+- Camera permissions
+- Camera capabilities
+- Camera formats
+- Photo resolutions
+- Video resolutions
+- FPS support
+- Native API support
+- Expo Go compatibility
+- Development Build requirements
+
+### Technologies Used
+
+- Expo Camera
+- React Native Vision Camera
+
+### Concepts Learned
+
+- Native modules
+- Development builds
+- Camera hardware APIs
+- Expo limitations
+- Runtime capability detection
+
+---
+
+# Task 6 - Vision Camera Setup
+
+### Objective
+
+Configure Vision Camera using a native development build.
+
+### Work Completed
+
+- Installed Vision Camera
+- Installed Nitro Modules
+- Configured Android permissions
+- Built Expo Development Build using EAS
+- Installed APK
+- Verified native module functionality
+
+### Technologies Used
+
+- React Native Vision Camera
+- Nitro Modules
+- EAS Build
+
+### Concepts Learned
+
+- Native modules
+- JSI
+- Hybrid Objects
+- Development builds
+- Native dependency management
+
+---
+
+# Task 7 - Camera Capability Screen (RN-007)
+
+### Objective
+
+Read camera hardware information at runtime using native APIs.
+
+### Work Completed
+
+Built a Camera Capability screen that dynamically detects available cameras and displays hardware information.
+
+Implemented:
+
+- Camera detection
+- Front camera detection
+- Back camera detection
+- Multiple camera detection
+- Runtime hardware information
+- Flash support
+- Torch support
+- HDR support
+- Low Light Boost support
+- Focus Lock support
+- Focus Metering support
+- Exposure Metering support
+- Supported FPS ranges
+- Supported Pixel Formats
+- Supported Photo Resolutions
+- Supported Video Resolutions
+
+All information is retrieved dynamically from the device using native Vision Camera APIs.
+
+### Technologies Used
+
+- React Native Vision Camera
+- Native Camera APIs
+- TypeScript
+- React Native
+
+### Concepts Learned
+
+- Runtime hardware capability detection
+- Camera devices
+- Camera resolutions
+- FPS ranges
+- Pixel formats
+- Hybrid Objects
+- Native camera capabilities
+
+---
+
+# Task 8 - Maestro End-to-End Testing
+
+### Objective
+
+Learn mobile application end-to-end testing.
+
+### Work Completed
+
+- Installed Maestro
+- Created first E2E test
+- Tested camera permission screen
+- Learned deterministic testing
+- Verified application flow
+
+### Technologies Used
+
+- Maestro
+
+### Concepts Learned
+
+- Mobile UI testing
+- End-to-end testing
+- Test automation
+- Mobile test flows
+
+---
+
+# Skills Gained
+
+Throughout these tasks I gained practical experience in:
+
+- React Native fundamentals
+- Expo ecosystem
+- Expo Router
+- Native mobile APIs
+- Camera integration
+- Runtime permissions
+- Vision Camera
+- Native Modules
+- JSI & Hybrid Objects
+- Android Development
+- Git & GitHub
+- EAS Development Builds
+- Mobile testing with Maestro
+- Error handling
+- Mobile UI development
+- TypeScript
+
+---
+
+# Future Learning
+
+This repository will continue to be updated with new internship tasks, React Native concepts, native module integrations, testing, and mobile application development features.
+
+---
+
+# Author
+
+**Rooheen Farooqi**
+
+BS Computer Science  
+Institute of Space Technology (IST)
+
+React Native & Mobile Application Development Learning Repository
